@@ -6,3 +6,5 @@ extern crate portaudio_rs;
 extern crate num_traits;
 
 pub mod drivers;
+pub mod playback;
+pub mod providers;

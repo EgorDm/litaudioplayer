@@ -1,5 +1,6 @@
 use litaudio::Sample;
 use std::{error, fmt};
+use crate::providers::Provider;
 
 #[derive(Debug, Clone)]
 pub enum PlaybackError {
@@ -78,6 +79,8 @@ pub trait Driver<T: Sample>: PlaybackObserver + Sized {
 	type DriverParams: Clone;
 
 	fn create(params: DriverParameters<Self::DriverParams>) -> Result<Box<Self>, DriverError>;
+
+	fn set_provider(&mut self, provider: Box<dyn Provider<T>>);
 
 	fn get_params(&self) -> &DriverParameters<Self::DriverParams>;
 }
