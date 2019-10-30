@@ -1,6 +1,6 @@
 use litaudioplayer::drivers::*;
 use bitflags::_core::time::Duration;
-use litaudioplayer::providers::source_static::SourceStaticProvider;
+use litaudioplayer::providers::{SourceStaticProvider, Sine};
 use std::path::{PathBuf};
 use litcontainers::*;
 use litaudio::{AudioDeinterleaved, AudioStorage};
@@ -16,7 +16,8 @@ fn main() {
 	let mut driver = PortaudioDriver::<i16>::create(params).unwrap();
 	let audio_provider = SourceStaticProvider::new(audio);
 
-	driver.set_provider(Box::new(audio_provider));
+	//driver.set_provider(Box::new(audio_provider));
+	driver.set_provider(Box::new(Sine::new()));
 
 	println!("Start");
 	driver.on_start().unwrap();
